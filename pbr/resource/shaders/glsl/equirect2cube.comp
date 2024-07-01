@@ -1,0 +1,46 @@
+#version 450 core
+
+// 将等距柱状投影 (经纬) 纹理转换为正确的立方体贴图
+const float PI = 3.141592;
+const float TwoPI = 2 * PI;
+
+// 输入纹理，等距柱状投影格式、输出立方体贴图纹理
+layout(binding=0) uniform sampler2D inputTexture;  
+layout(binding=0, rgba16f) restrict writeonly uniform imageCube outputTexture;
+
+// 基于当前片段坐标(gl_GlobalInvocationID.xyz)计算归一化的采样方向向量
+// 这实际上是“逆采样”：我们重建采样向量，如果我们希望它“命中”立方体贴图中的这个特定片段
+// 参考: OpenGL核心规范，第8.13节
+vec3 getSamplingVector()
+{
+    // 获取当前全局调用ID的xy分量，并将其转换为纹理坐标
+    vec2 st = gl_GlobalInvocationID.xy/vec2(imageSize(outputTexture));
+    vec2 uv = 2.0 * vec2(st.x, 1.0-st.y) - vec2(1.0);      // 将纹理坐标转换为范围在[-1, 1]之间的UV坐标
+
+    vec3 ret;
+	// 根据立方体贴图的面索引选择采样向量
+    if(gl_GlobalInvocationID.z == 0)      ret = vec3(1.0,  uv.y, -uv.x);
+    else if(gl_GlobalInvocationID.z == 1) ret = vec3(-1.0, uv.y,  uv.x);
+    else if(gl_GlobalInvocationID.z == 2) ret = vec3(uv.x, 1.0, -uv.y);
+    else if(gl_GlobalInvocationID.z == 3) ret = vec3(uv.x, -1.0, uv.y);
+    else if(gl_GlobalInvocationID.z == 4) ret = vec3(uv.x, uv.y, 1.0);
+    else if(gl_GlobalInvocationID.z == 5) ret = vec3(-uv.x, uv.y, -1.0);
+     // 返回归一化后的采样向量
+    return normalize(ret);
+}
+
+layout(local_size_x=32, local_size_y=32, local_size_z=1) in;
+void main(void)
+{
+	vec3 v = getSamplingVector();   // 获取采样方向向量
+
+	 // 将笛卡尔方向向量转换为球面坐标
+	float phi   = atan(v.z, v.x);
+	float theta = acos(v.y);
+
+	// 采样等距柱状投影纹理
+	vec4 color = texture(inputTexture, vec2(phi/TwoPI, theta/PI));
+
+	// 将颜色写入输出立方体贴图
+	imageStore(outputTexture, ivec3(gl_GlobalInvocationID), color);
+}
