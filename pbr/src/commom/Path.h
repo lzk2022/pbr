@@ -1,6 +1,6 @@
 #include "Log.h"
 
-#define PATH "resource/"
+#define PATH "../resource/"
 
 //#define PATH "C:\\work\\vs 2022\\pbr02\\data\\"
 
@@ -22,6 +22,8 @@ static constexpr int gBRDF_LUT_Size = 256;		// BRDF 查找表的大小（用于镜面反射计
 // 支持的最大各向异性过滤级别是16倍。
 
 extern float gMaxAnisotropy;					// 最大各向异性
+
+void InitPath();
 
 
 

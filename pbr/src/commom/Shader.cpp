@@ -29,7 +29,7 @@ GLuint Shader::LinkProgram(std::initializer_list<std::string> shaderFiles)
 	{
 		ext = file.substr(file.find_last_of(".") + 1);
 		file = "shaders\\glsl\\" + file;
-		file = PATH + file;
+		//file = PATH + file;
 		//LOG_ASSERT(!shaderType[ext], "编译着色器文件错误，文件类型不支持\t"+file);
 		LOG_ASSERT(!shaderType[ext], "Wrong compilation shader file, file type not supported:\t" + file);
 		shaderId = CompileShader(file, shaderType[ext]);

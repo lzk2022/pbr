@@ -263,6 +263,12 @@ Texture Renderer::LoadAndConvertEquirectangularToCubemap() {
 }
 Texture Renderer::ComputePreFilteredSpecularMap(Texture& envUnfilteredT, int gEnvMapSize)
 {
+	/***************************************************************
+		此函数将等矩形环境贴图转换为预过滤的镜面环境立方体贴图。
+		它首先将未过滤的环境立方体贴图的第0级mipmap复制到目标环境立方体贴图，
+		然后使用计算着色器逐级生成预过滤的mipmap链。
+	 **************************************************************/
+
 	// 链接并编译着色器程序，用于计算预过滤的镜面环境贴图。
 	GLuint spmapProgram = Shader::LinkProgram({ "spmap.comp" });
 	// 创建一个立方体贴图纹理，大小为 gEnvMapSize x gEnvMapSize，格式为 GL_RGBA16F。

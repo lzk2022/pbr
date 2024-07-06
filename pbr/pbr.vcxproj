@@ -46,6 +46,29 @@
     <ClInclude Include="src\commom\Shader.h" />
     <ClInclude Include="src\commom\Texture.h" />
     <ClInclude Include="src\commom\Utils.h" />
+    <ClInclude Include="src\vulkan\Renderer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="plugs\dll\assimp.dll" />
+    <None Include="plugs\dll\glfw3.dll" />
+    <None Include="resource\environment.hdr" />
+    <None Include="resource\meshes\pbr.fbx" />
+    <None Include="resource\shaders\glsl\equirect2cube.comp" />
+    <None Include="resource\shaders\glsl\irmap.comp" />
+    <None Include="resource\shaders\glsl\pbr.frag" />
+    <None Include="resource\shaders\glsl\pbr.vert" />
+    <None Include="resource\shaders\glsl\skybox.frag" />
+    <None Include="resource\shaders\glsl\skybox.vert" />
+    <None Include="resource\shaders\glsl\spbrdf.comp" />
+    <None Include="resource\shaders\glsl\spmap.comp" />
+    <None Include="resource\shaders\glsl\tonemap.frag" />
+    <None Include="resource\shaders\glsl\tonemap.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resource\textures\pbrA.png" />
+    <Image Include="resource\textures\pbrM.png" />
+    <Image Include="resource\textures\pbrN.png" />
+    <Image Include="resource\textures\pbrR.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -100,8 +123,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>plugs/include;$(IncludePath)</IncludePath>
-    <LibraryPath>plugs/lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>../plugs/include;$(IncludePath)</IncludePath>
+    <LibraryPath>../plugs/lib;$(LibraryPath)</LibraryPath>
+    <OutDir>..\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>..\$(Platform)\obj</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

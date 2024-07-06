@@ -1,6 +1,5 @@
 #include <stdexcept>
 #include <GLFW/glfw3.h>
-
 #include "Application.h"
 #include "Renderer.h"
 #include "Path.h"
@@ -34,6 +33,7 @@ void Application::Run()
 void Application::Clear()
 {
 	mRenderer->Clear();
+	//glfwTerminate();
 }
 
 Application::Application()

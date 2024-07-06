@@ -21,5 +21,8 @@ int main()
 	catch (const std::exception& e)
 	{
 		LOG_EXCEPTION(e.what());
+		getchar();
 	}
+	
+	return 0;
 }

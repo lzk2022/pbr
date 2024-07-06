@@ -17,7 +17,6 @@ public:
 
 private:
 	void CreateTexture(GLenum target, GLenum iformat);
-
 	void Init();
 	int  CalMipmapLevel() const;
 

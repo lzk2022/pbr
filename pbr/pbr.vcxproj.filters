@@ -92,5 +92,38 @@
     <ClInclude Include="src\commom\Utils.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\vulkan\Renderer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resource\shaders\glsl\equirect2cube.comp" />
+    <None Include="resource\shaders\glsl\irmap.comp" />
+    <None Include="resource\shaders\glsl\pbr.frag" />
+    <None Include="resource\shaders\glsl\pbr.vert" />
+    <None Include="resource\shaders\glsl\skybox.frag" />
+    <None Include="resource\shaders\glsl\skybox.vert" />
+    <None Include="resource\shaders\glsl\spbrdf.comp" />
+    <None Include="resource\shaders\glsl\spmap.comp" />
+    <None Include="resource\shaders\glsl\tonemap.frag" />
+    <None Include="resource\shaders\glsl\tonemap.vert" />
+    <None Include="resource\environment.hdr" />
+    <None Include="resource\meshes\pbr.fbx" />
+    <None Include="plugs\dll\assimp.dll" />
+    <None Include="plugs\dll\glfw3.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resource\textures\pbrA.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="resource\textures\pbrM.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="resource\textures\pbrN.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="resource\textures\pbrR.png">
+      <Filter>资源文件</Filter>
+    </Image>
   </ItemGroup>
 </Project>
